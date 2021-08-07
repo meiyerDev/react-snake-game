@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { createGlobalStyle } from "styled-components";
+import LayoutAppComponent from "./components/LayoutAppComponent";
+import ScoreSectionComponent from "./components/ScoreSectionComponent";
+import SnakeBoardComponent from "./components/SnakeBoardComponent";
+import { GameProvider } from "./contexts/game-context";
+import { GameHistoryProvider } from "./contexts/game-history-context";
+
+const GlobalStyle = createGlobalStyle`
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-size: 16px;
+    font-family: "Suez One", serif;
+  }
+`;
 
 function App() {
+  console.log("App");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GameProvider>
+      <GameHistoryProvider>
+        <LayoutAppComponent>
+          <GlobalStyle />
+          <ScoreSectionComponent />
+          <SnakeBoardComponent />
+        </LayoutAppComponent>
+      </GameHistoryProvider>
+    </GameProvider>
   );
 }
 
